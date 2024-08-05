@@ -6,7 +6,7 @@ from PIL import Image
 import os
 
 # Load the model
-model_path = 'C:/Users/mdaza/OneDrive/Desktop/deep folder/Image_classify.keras'
+model_path = 'Image_classify.keras'
 model = load_model(model_path)
 
 # Categories
