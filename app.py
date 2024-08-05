@@ -7,7 +7,7 @@ from PIL import Image
 import os
 
 # Load the model
-model_path = 'Image_classify.keras'
+model_path = 'Image_classify.zip'
 model = load_model(model_path)
 
 # Categories
