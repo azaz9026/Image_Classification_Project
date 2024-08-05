@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4705dae252fc4505977c8c32b9e75d13adec5e4f
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 import streamlit as st
@@ -51,3 +54,4 @@ if uploaded_file is not None:
             st.error(f"Error during prediction: {e}")
 else:
     st.write("Please upload an image file.")
+
