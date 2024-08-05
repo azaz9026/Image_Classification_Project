@@ -1,4 +1,4 @@
-pandas 
-numpy
-streamlit
 tensorflow
+streamlit
+numpy
+Pillow
