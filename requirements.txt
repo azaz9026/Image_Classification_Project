@@ -2,3 +2,8 @@ tensorflow
 streamlit
 numpy
 Pillow
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> fc4b579b01eb51df69b8593b08962b06a29e56a1

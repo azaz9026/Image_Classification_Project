@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> fc4b579b01eb51df69b8593b08962b06a29e56a1
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 import streamlit as st
@@ -6,7 +10,7 @@ from PIL import Image
 import io
 
 # Load the model
-model_path = 'Image_classify.keras'
+model_path = 'Image_classify.zip'
 model = load_model(model_path)
 
 # Categories
