@@ -1,13 +1,9 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 4705dae252fc4505977c8c32b9e75d13adec5e4f
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 import streamlit as st
 import numpy as np
 from PIL import Image
-import os
+import io
 
 # Load the model
 model_path = 'Image_classify.keras'
@@ -23,17 +19,19 @@ data_cat = ['apple', 'banana', 'beetroot', 'bell pepper', 'cabbage', 'capsicum',
 
 img_height = 180
 img_width = 180
+display_img_height = 120  # Smaller height for display
+display_img_width = 120   # Smaller width for display
 
-st.title('Fruit and Vegetable Classification')
-
-st.write("Upload an image of a fruit or vegetable to get its classification.")
+st.set_page_config(page_title="Fruit and Vegetable Classifier", page_icon="🍎", layout="wide")
+st.title('Fruit and Vegetable Classification App')
+st.write("Upload an image of a fruit or vegetable, and our model will classify it for you.")
 
 # File uploader for image
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     # Display loading spinner while processing
-    with st.spinner('Processing...'):
+    with st.spinner('Processing your image...'):
         image = Image.open(uploaded_file)
         image = image.resize((img_width, img_height))
         img_arr = tf.keras.preprocessing.image.img_to_array(image)
@@ -46,12 +44,28 @@ if uploaded_file is not None:
             class_idx = np.argmax(score)
             confidence = np.max(score) * 100
             
-            # Display image and prediction
-            st.image(image, caption='Uploaded Image', use_column_width=True)
-            st.write(f'**Prediction:** {data_cat[class_idx]}')
-            st.write(f'**Confidence:** {confidence:.2f}%')
+            # Resize image for display
+            image_for_display = image.resize((display_img_width, display_img_height))
+            
+            # Display results
+            col1, col2 = st.columns([1, 2])
+            
+            with col1:
+                st.image(image_for_display, caption='Uploaded Image', use_column_width=False, width=display_img_width)
+                
+            with col2:
+                st.write(f'**Prediction:** {data_cat[class_idx]}')
+                st.write(f'**Confidence:** {confidence:.2f}%')
+                
         except Exception as e:
-            st.error(f"Error during prediction: {e}")
+            st.error(f"An error occurred: {e}")
 else:
-    st.write("Please upload an image file.")
+    st.info("Please upload an image file to classify.")
 
+# Additional Information
+st.sidebar.header("About")
+st.sidebar.write("""
+    This web app uses a TensorFlow model to classify fruits and vegetables from images.
+    - **Model**: Trained on various fruit and vegetable images.
+    - **Instructions**: Upload an image, and the app will display the predicted class and confidence.
+""")
